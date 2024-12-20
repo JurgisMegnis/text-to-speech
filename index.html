@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <title>Text to speech</title>
+    <link rel="stylesheet" href="resources/styles/style.css">
+</head>
+<body>
+    <header>
+        <p class="app-nanem">Speechbot</p>
+    </header>   
+    <section class="main-input-container">
+        <textarea name="enter your text" id="text-input" rows="6">Enter your text</textarea>
+    </section>
+    <section class="settings-container">
+        <div class="voice-container">
+            <p class="voice-label">Voice</p>
+            <select name="dropdown-accent" id="dropdown-accent">
+                <option value="dd-acc-value1">en-US</option>
+                <option value="dd-acc-value2">en-UK</option>
+            </select>
+            <select name="dropdown-character" id="dropdown-character">
+                <option value="dd-char-value1">Albert</option>
+                <option value="dd-char-value2">Lisa</option>
+            </select>
+        </div>
+        <div class="speed-container">
+            <p class="speed-label">Speed</p>
+            <label>
+                <input type="radio" name="group-name" value="speed-xs"> 0.5x
+            </label>
+            <label>
+                <input type="radio" name="group-name" value="speed-s"> 0.75x
+            </label>
+            <label>
+                <input type="radio" name="group-name" value="speed-m"> 1x
+            </label>
+            <label></label>
+                <input type="radio" name="group-name" value="speed-l"> 1.5x
+            </label>
+        </div>
+    </section>
+    <section class="button-container">
+        <input type="button" value="Text to speech" id="main-button">
+    </section>
+
+    <script src="resources/javascript/script.js"></script>
+</body>
+</html>
