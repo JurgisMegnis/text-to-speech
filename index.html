@@ -12,41 +12,40 @@
 <body>
     <header>
         <p class="app-nanem">Speechbot</p>
-    </header>   
-    <section class="main-input-container">
-        <textarea name="enter your text" id="text-input" rows="6">Enter your text</textarea>
-    </section>
-    <section class="settings-container">
-        <div class="voice-container">
-            <p class="voice-label">Voice</p>
-            <select name="dropdown-accent" id="dropdown-accent">
-                <option value="dd-acc-value1">en-US</option>
-                <option value="dd-acc-value2">en-UK</option>
-            </select>
-            <select name="dropdown-character" id="dropdown-character">
-                <option value="dd-char-value1">Albert</option>
-                <option value="dd-char-value2">Lisa</option>
-            </select>
-        </div>
-        <div class="speed-container">
-            <p class="speed-label">Speed</p>
-            <label>
-                <input type="radio" name="group-name" value="speed-xs"> 0.5x
-            </label>
-            <label>
-                <input type="radio" name="group-name" value="speed-s"> 0.75x
-            </label>
-            <label>
-                <input type="radio" name="group-name" value="speed-m"> 1x
-            </label>
-            <label></label>
-                <input type="radio" name="group-name" value="speed-l"> 1.5x
-            </label>
-        </div>
-    </section>
-    <section class="button-container">
-        <input type="button" value="Text to speech" id="main-button">
-    </section>
+    </header>
+    <form>
+        <section class="main-input-container">
+            <textarea name="enter your text" id="text-input" rows="6">Enter your text</textarea>
+        </section>
+        <section class="settings-container">
+            <div class="voice-container">
+                <p class="voice-label">Voice</p>
+                <select name="dropdown-voice" id="dropdown-voice"></select>
+                <select name="dropdown-character" id="dropdown-character">
+                    <option value="dd-char-value1">Albert</option>
+                    <option value="dd-char-value2">Lisa</option>
+                </select>
+            </div>
+            <div class="speed-container">
+                <p class="speed-label">Speed</p>
+                <label>
+                    <input type="radio" name="group-name" value="speed-xs"> 0.5x
+                </label>
+                <label>
+                    <input type="radio" name="group-name" value="speed-s"> 0.75x
+                </label>
+                <label>
+                    <input type="radio" name="group-name" value="speed-m"> 1x
+                </label>
+                <label></label>
+                    <input type="radio" name="group-name" value="speed-l"> 1.5x
+                </label>
+            </div>
+        </section>
+        <section class="button-container">
+            <input type="submit" value="Text to speech" id="text-to-speech-btn">
+        </section>
+    </form>
 
     <script src="resources/javascript/script.js"></script>
 </body>
