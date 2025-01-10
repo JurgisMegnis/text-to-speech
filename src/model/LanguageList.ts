@@ -22,6 +22,11 @@ export default class LanguageList implements Language {
         this._language = this._synth.getVoices()
         const languageSelector = document.getElementById("dropdown-language") as HTMLSelectElement
 
+        if (this._language.length === 0) {
+            console.warn("No voices available")
+            return
+        }
+
         this._language.forEach((item, i) => {
             const option = document.createElement("option") as HTMLOptionElement
             option.textContent = item.lang
