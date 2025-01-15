@@ -1,6 +1,6 @@
 import GetVoices from "../model/GetVoices"
 
-interface ListParameters {
+interface IListTemplate {
     selectElementId: HTMLSelectElement
     parameter: "lang" | "name"
     populate(): void
@@ -8,7 +8,8 @@ interface ListParameters {
     dispatchSelectedValue(selectedValue: string | null): void
 }
 
-export default class ListTemplate implements ListParameters {
+
+export default class ListTemplate implements IListTemplate {
     selectElementId: HTMLSelectElement
     parameter: "lang" | "name"
     private eventTarget: EventTarget
