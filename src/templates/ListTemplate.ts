@@ -5,6 +5,7 @@ interface ListParameters {
     parameter: "lang" | "name"
     populate(): void
     getSelectedValue(): void
+    dispatchSelectedValue(selectedValue: string | null): void
 }
 
 export default class ListTemplate implements ListParameters {
