@@ -4,16 +4,20 @@ interface ListParameters {
     selectElementId: HTMLSelectElement
     parameter: "lang" | "name"
     populate(): void
-    getSelected(): void
+    getSelectedValue(): void
 }
 
 export default class ListTemplate implements ListParameters {
     selectElementId: HTMLSelectElement
     parameter: "lang" | "name"
+    private eventTarget: EventTarget
 
-    constructor(selectElementId: string, parameter: "lang" | "name") {
+    constructor(selectElementId: string, parameter: "lang" | "name", eventTarget: EventTarget) {
         this.selectElementId = document.getElementById(selectElementId) as HTMLSelectElement
         this.parameter = parameter
+        this.eventTarget = eventTarget
+        this.populate()
+        this.getSelectedValue()
     }
 
     populate(): void {
@@ -41,13 +45,22 @@ export default class ListTemplate implements ListParameters {
         })
     }
 
-    getSelected(): void {
+    getSelectedValue(): void {
         this.selectElementId.addEventListener('change', () => {
+            let selectedValue = null;
+
             if(this.parameter === "lang") {
-                console.log(this.selectElementId.selectedOptions[0].getAttribute("data-lang"))
+                selectedValue = this.selectElementId.selectedOptions[0].getAttribute("data-lang")
             } else if(this.parameter === "name") {
-                console.log(this.selectElementId.selectedOptions[0].getAttribute("data-name"))
+                selectedValue = this.selectElementId.selectedOptions[0].getAttribute("data-name")                
             }
+
+            this.dispatchSelectedValue(selectedValue)
         })
+    }
+
+    dispatchSelectedValue(selectedValue: string | null): void {
+        const event = new CustomEvent('selectionChanged', { detail: {selectedValue, parameter: this.parameter} })
+        this.eventTarget.dispatchEvent(event)
     }
 }
