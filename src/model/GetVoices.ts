@@ -1,16 +1,15 @@
-interface VoiceParameters {
-    synth: SpeechSynthesis,
-    voice: SpeechSynthesisVoice[],
+interface SynthesisVoiceProvider {
+    synth: SpeechSynthesis
     getVoiceObj(): Promise<SpeechSynthesisVoice[]>,
 }
 
-export default class GetVoices implements VoiceParameters {
+export default class GetVoices implements SynthesisVoiceProvider {
     synth: SpeechSynthesis
-    voice: SpeechSynthesisVoice[]
+    private voice: SpeechSynthesisVoice[]
 
-    constructor(voice: SpeechSynthesisVoice[] = [], synth: SpeechSynthesis = window.speechSynthesis) {
+    constructor(synth: SpeechSynthesis = window.speechSynthesis) {
         this.synth = synth
-        this.voice = voice
+        this.voice = []
     }
 
     getVoiceObj(timeout: number = 5000): Promise<SpeechSynthesisVoice[]> {

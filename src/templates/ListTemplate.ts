@@ -1,45 +1,28 @@
 import GetVoices from "../model/GetVoices"
 
-interface IListTemplate {
-    selectElementId: HTMLSelectElement
-    parameter: "lang" | "name"
-    populate(): void
-    getSelectedValue(): void
-    dispatchSelectedValue(selectedValue: string | null): void
-}
-
-
-export default class ListTemplate implements IListTemplate {
-    selectElementId: HTMLSelectElement
-    parameter: "lang" | "name"
+export default class ListTemplate {
+    private selectElement: HTMLSelectElement
     private eventTarget: EventTarget
 
-    constructor(selectElementId: string, parameter: "lang" | "name", eventTarget: EventTarget) {
-        this.selectElementId = document.getElementById(selectElementId) as HTMLSelectElement
-        this.parameter = parameter
+    constructor(selectElementId: string, eventTarget: EventTarget) {
+        this.selectElement = document.getElementById(selectElementId) as HTMLSelectElement
         this.eventTarget = eventTarget
         this.populate()
         this.getSelectedValue()
     }
 
-    populate(): void {
+    private populate(): void {
         const languageList: GetVoices = new GetVoices()
         languageList.getVoiceObj()
         .then(voiceObj => {
             voiceObj.forEach((voiceItem, i) => {
                 const option = document.createElement("option") as HTMLOptionElement
-                option.textContent = voiceItem[this.parameter]
+                option.textContent = `${voiceItem.name} (${voiceItem.lang})`
                 option.value = i.toString()
-                this.selectElementId.appendChild(option)
-
-                switch (this.parameter) {
-                    case "lang":
-                        option.setAttribute("data-lang", voiceItem.lang)
-                        break;
-                    case "name":
-                        option.setAttribute("data-name", voiceItem.name)
-                        break;
-                }
+                this.selectElement.appendChild(option)
+                
+                option.setAttribute("data-lang", voiceItem.lang)
+                option.setAttribute("data-name", voiceItem.name)
             })            
         })
         .catch(error => {
@@ -47,22 +30,15 @@ export default class ListTemplate implements IListTemplate {
         })
     }
 
-    getSelectedValue(): void {
-        this.selectElementId.addEventListener('change', () => {
-            let selectedValue = null;
-
-            if(this.parameter === "lang") {
-                selectedValue = this.selectElementId.selectedOptions[0].getAttribute("data-lang")
-            } else if(this.parameter === "name") {
-                selectedValue = this.selectElementId.selectedOptions[0].getAttribute("data-name")                
-            }
-
+    private getSelectedValue(): void {
+        this.selectElement.addEventListener('change', () => {
+            let selectedValue: string | null = this.selectElement.selectedOptions[0].getAttribute("data-name")
             this.dispatchSelectedValue(selectedValue)
         })
     }
 
-    dispatchSelectedValue(selectedValue: string | null): void {
-        const event = new CustomEvent('selectionChanged', { detail: {selectedValue, parameter: this.parameter} })
+    private dispatchSelectedValue(selectedValue: string | null): void {
+        const event = new CustomEvent('selectionChanged', { detail: {selectedValue} })
         this.eventTarget.dispatchEvent(event)
     }
 }

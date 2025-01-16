@@ -1,10 +1,9 @@
 import './style.scss'
 import ListTemplate from './templates/ListTemplate'
+import { eventBus } from './model/EventBus'
 
 const initApp = (): void => {
-    const eventTarget = new EventTarget()
-    new ListTemplate("dropdown-language", "lang", eventTarget)
-    new ListTemplate("dropdown-character", "name", eventTarget)
+    new ListTemplate("dropdown-voice", eventBus)
 }
 
 initApp()
