@@ -1,0 +1,11 @@
+@use "font-face" as *;
+
+@mixin input-txt {
+    font-family: 'Copernicus', serif;
+    font-size: 2rem;
+}
+
+@mixin action-txt {
+    font-family: 'Geist', sans-serif;
+    font-size: 1rem;
+}

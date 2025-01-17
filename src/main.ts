@@ -1,4 +1,4 @@
-import './style.scss'
+import './sass/style.scss'
 import { eventBus } from './model/EventBus'
 import ListTemplate from './templates/ListTemplate'
 import FormTemplate from './templates/FormTemplate'
