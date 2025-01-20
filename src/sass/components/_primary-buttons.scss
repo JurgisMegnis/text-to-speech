@@ -1,0 +1,24 @@
+@use "../abstracts/" as *;
+
+.button-container {
+    input[type="submit"] {
+        background-image: linear-gradient(175deg, $button-background-color-one, $button-background-color-two);
+        padding: 1rem 80px 1rem 80px;
+        border-radius: 12px;
+        @include action-txt;
+        color: $foreground;
+        border: none;
+        box-shadow: inset 0 1.5px 1px #535250, 
+                    inset 0 -1.5px 1px #535250,
+                    0 0 3px #100F0F;
+        cursor: pointer;
+        
+        &:hover {
+            background-image: linear-gradient(180deg, $button-background-color-one, $button-background-color-one);
+        }
+
+        &:active {
+            box-shadow: 0 0 3px #100F0F;
+        }
+    }
+}
