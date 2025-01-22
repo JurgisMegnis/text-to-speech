@@ -1,9 +1,11 @@
 import './style.scss'
-import ListTemplate from './templates/ListTemplate'
 import { eventBus } from './model/EventBus'
+import ListTemplate from './templates/ListTemplate'
+import FormTemplate from './templates/FormTemplate'
 
 const initApp = (): void => {
     new ListTemplate("dropdown-voice", eventBus)
+    new FormTemplate("text-input")
 }
 
 initApp()
