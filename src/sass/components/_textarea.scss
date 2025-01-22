@@ -1,0 +1,23 @@
+@use "../abstracts/" as *;
+
+.main-input-container {
+    width: 60%;
+
+    #text-input {
+        width: 100%;
+        background: rgba(0,0,0,0.0);
+        color: $foreground;
+        border: 0;
+        @include input-txt;
+        resize: none;
+        caret-color: $accent;
+
+        &::placeholder {
+            color: $foreground-400;
+        }
+
+        &:focus {
+            outline:none;
+        }
+    }
+}

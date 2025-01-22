@@ -6,38 +6,38 @@
     <title>Text to speech</title>
   </head>
   <body>
-    <header>
-      <p class="app-nanem">Speechbot</p>
-  </header>
-  <form>
-      <section class="main-input-container">
-          <textarea name="enter your text" id="text-input" rows="6" placeholder="Enter your text here"></textarea>
-      </section>
-      <section class="settings-container">
-          <div class="voice-container">
-              <p class="voice-label">Voice</p>
-              <select name="dropdown-voice" id="dropdown-voice"></select>
-          </div>
-          <div class="speed-container">
-              <p class="speed-label">Speed</p>
-              <label>
-                  <input type="radio" name="group-name" value="speed-xs"> 0.5x
-              </label>
-              <label>
-                  <input type="radio" name="group-name" value="speed-s"> 0.75x
-              </label>
-              <label>
-                  <input type="radio" name="group-name" value="speed-m"> 1x
-              </label>
-              <label></label>
-                  <input type="radio" name="group-name" value="speed-l"> 1.5x
-              </label>
-          </div>
-      </section>
-      <section class="button-container">
-          <input type="submit" value="Text to speech" id="text-to-speech-btn">
-      </section>
-  </form>
+    <form>
+        <section class="main-input-container">
+            <textarea name="enter your text" id="text-input" rows="6" placeholder="Enter your text here"></textarea>
+        </section>
+        <section class="button-container">
+             <button type="submit" id="text-to-speech-btn">Text to speech</button>
+        </section>
+    </form>
+    <div class="settings-top-border"></div>
+    <section class="settings-container">
+        
+        <div class="voice-container">
+            <p class="voice-label">Voice</p>
+            <select name="dropdown-voice" id="dropdown-voice"></select>
+        </div>
+        <div class="speed-container">
+            <p class="speed-label">Speed</p>
+            <label>
+                <input type="radio" name="group-name" value="speed-xs"> 0.5x
+            </label>
+            <label>
+                <input type="radio" name="group-name" value="speed-s"> 0.75x
+            </label>
+            <label>
+                <input type="radio" name="group-name" value="speed-m"> 1x
+            </label>
+            <label>
+                <input type="radio" name="group-name" value="speed-l"> 1.5x
+            </label>
+        </div>
+    </section>
+      
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
