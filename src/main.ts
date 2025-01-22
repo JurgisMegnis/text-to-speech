@@ -5,7 +5,7 @@ import FormTemplate from './templates/FormTemplate'
 
 const initApp = (): void => {
     new ListTemplate("dropdown-voice", eventBus)
-    new FormTemplate("text-input")
+    new FormTemplate("text-input", "text-to-speech-btn")
 }
 
 initApp()
