@@ -4,6 +4,11 @@
 }
 
 @font-face {
-    font-family: "Geist";
+    font-family: "Geist-Medium";
     src: url('/fonts/Geist-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Geist-Regular";
+    src: url(/public/fonts/Geist-Regular.ttf) format('truetype');
 }

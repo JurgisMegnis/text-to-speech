@@ -1,0 +1,42 @@
+@use "../abstracts/" as *;
+
+.select-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    @include action-txt;
+
+    .select-label {
+        color: $foreground;
+    }
+
+    select {
+        @include selection-txt;
+        background-color: $button-background-color-one;
+        border-color: transparent;
+        padding: 12px 48px 12px 32px;
+        border-radius: 12px;
+        color: $foreground;
+        box-shadow: inset 0 1.5px 1px #535250, 
+                    inset 0 -1.5px 1px #535250,
+                    0 0 3px #100F0F;
+        cursor: pointer;
+
+        appearance: none;
+        background-image: url("/public/icons/chevron-down.svg");
+        background-repeat: no-repeat;
+        background-position: right 1rem top 50%;
+        background-size: 2rem auto;
+        transition: background-image .3s;
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 3px $accent;
+            border-color: $accent;
+        }
+
+        &:hover {
+            background-image: url("/public/icons/chevron-down-hover-state.svg");
+        }
+    }
+}
