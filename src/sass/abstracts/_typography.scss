@@ -6,6 +6,11 @@
 }
 
 @mixin action-txt {
-    font-family: 'Geist', sans-serif;
+    font-family: 'Geist-Medium', sans-serif;
+    font-size: 1rem;
+}
+
+@mixin selection-txt {
+    font-family: 'Geist-Regular', sans-serif;
     font-size: 1rem;
 }
