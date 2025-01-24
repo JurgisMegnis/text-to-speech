@@ -1,6 +1,7 @@
 import TextToSpeech from "../model/TextToSpeech";
 import { eventBus } from "../model/EventBus";
 import { DotLottie } from '@lottiefiles/dotlottie-web';
+const { BASE_URL } = import.meta.env;
 
 export default class FormTemplate {
     private textFieldId: HTMLTextAreaElement
@@ -40,7 +41,7 @@ export default class FormTemplate {
                 autoplay: true,
                 loop: true,
                 canvas: document.querySelector('#dotlottie-canvas') as HTMLCanvasElement,
-                src: "/animation/speech-icon.json",
+                src: `${BASE_URL}animation/speech-icon.json`,
             });
         }
 
