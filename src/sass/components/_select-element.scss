@@ -12,8 +12,8 @@
 
     select {
         @include selection-txt;
-        background-color: $button-background-color-one;
-        border-color: transparent;
+        background-color: $button-support-neutral-one;
+        border: none;           
         padding: 12px 48px 12px 32px;
         border-radius: 12px;
         color: $foreground;
@@ -27,12 +27,11 @@
         background-repeat: no-repeat;
         background-position: right 1rem top 50%;
         background-size: 2rem auto;
-        transition: background-image .3s;
+        transition: background-image .2s;
 
         &:focus {
-            outline: none;
-            box-shadow: 0 0 3px $accent;
-            border-color: $accent;
+            outline: 1.5px solid $accent;
+            outline-offset: 1.5px;
         }
 
         &:hover {
