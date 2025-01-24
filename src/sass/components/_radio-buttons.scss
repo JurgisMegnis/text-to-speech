@@ -1,0 +1,114 @@
+@use "../abstracts/" as *;
+
+.radio-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    @include action-txt;
+
+    .radio-label {
+        color: $foreground;
+    }
+
+    .tabs {
+        height: 50px;
+        display: grid;
+        grid-auto-flow: column;
+        background-color: $dark-400;
+        box-shadow: inset 0 2px 2px #00000025;
+        border-radius: 12px;
+        grid-auto-columns: 1fr;
+        position: relative;
+
+        --ease: linear(
+        0, 0.1641 3.52%, 0.311 7.18%,
+        0.4413 10.99%, 0.5553 14.96%,
+        0.6539 19.12%, 0.738 23.5%,
+        0.8086 28.15%, 0.8662 33.12%,
+        0.9078 37.92%, 0.9405 43.12%,
+        0.965 48.84%, 0.9821 55.28%,
+        0.992 61.97%, 0.9976 70.09%, 1
+        );
+
+        > input,
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        &:has(:checked:nth-of-type(1)) { --active: 0; }
+        &:has(:checked:nth-of-type(2)) { --active: 1; }
+        &:has(:checked:nth-of-type(3)) { --active: 2; }
+        &:has(:checked:nth-of-type(4)) { --active: 3; }
+
+        &:has(input:nth-of-type(2)) { --count: 2; }
+        &:has(input:nth-of-type(3)) { --count: 3; }
+        &:has(input:nth-of-type(4)) { --count: 4; }
+        
+
+        label {
+            @include selection-txt;
+            padding: 0 16px 0 16px;
+            cursor: pointer;
+            text-align: center;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            color: #878580;
+            transition: background, color;
+            transition-duration: 0.25s;
+            transition-timing-function: var(--ease, ease);
+            z-index: 10;
+
+            &:nth-of-type(1) {
+                padding-left: 18px;
+            }
+
+            &:nth-of-type(4) {
+                padding-right: 18px;
+            }
+        }
+
+        input:checked + label { 
+            color: $foreground;
+        }
+
+        input:not(:checked) + label:hover {
+            color: $accent;
+        }
+
+        &::after {
+            pointer-events: none;
+            content: "";
+            width: calc(100% / var(--count) - 2px);
+            height: 42px;
+            margin: 4px;
+            background-image: linear-gradient(175deg, $button-support-neutral-one, $button-support-neutral-two);
+            box-shadow: inset 0 1.5px 1px #535250, 
+                        inset 0 -1.5px 1px #535250,
+                        0 0 3px #100F0F;
+            position: absolute;
+            border-radius: 12px;
+            
+            translate: calc(var(--active, 0) * 100%);
+            transition: translate, outline-color;
+            transition-duration: 0.25s;
+            transition-timing-function: var(--ease, ease);
+            outline: 2px solid transparent;
+        }
+
+        &:has(input:focus-visible) {
+            outline: 1.5px solid $accent;
+            outline-offset: 1.5px;
+        }
+    }
+
+    
+}
