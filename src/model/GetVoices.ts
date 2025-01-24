@@ -18,6 +18,9 @@ export default class GetVoices implements SynthesisVoiceProvider {
 
             const checkVoices = (): void => {
                 this.voice = this.synth.getVoices()
+                this.voice.sort((a, b) => {
+                    return a.lang.localeCompare(b.lang)
+                })
                 if (this.voice.length > 0) {
                     resolve(this.voice)
                 } else if (Date.now() - startTime > timeout) {

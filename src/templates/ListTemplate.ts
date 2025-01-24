@@ -20,7 +20,6 @@ export default class ListTemplate {
                 option.textContent = `${voiceItem.name} (${voiceItem.lang})`
                 option.value = i.toString()
                 this.selectElement.appendChild(option)
-                
                 option.setAttribute("data-lang", voiceItem.lang)
                 option.setAttribute("data-name", voiceItem.name)
             })            
