@@ -12,6 +12,7 @@ export default class GetVoices implements SynthesisVoiceProvider {
         this.voice = []
     }
 
+    /* gets the voice object containing all of the available voices and languages */
     getVoiceObj(timeout: number = 5000): Promise<SpeechSynthesisVoice[]> {
         return new Promise((resolve, reject) => {
             const startTime: number = Date.now()

@@ -18,6 +18,7 @@ export default class FormTemplate {
         this.buttonState()
     }
 
+    /* submits the text input */
     private textSynthesis(): void {
         const handleSubmit = (event: Event) => {
             event.preventDefault()
@@ -34,6 +35,7 @@ export default class FormTemplate {
         this.formTag.onsubmit = handleSubmit
     }
 
+    /* adds an animation to the button while the API is reading out the text */
     private buttonState(): void {
         this.textToSpeechClass.utterThis.onstart = () => {
             this.buttonId.innerHTML ='<canvas id="dotlottie-canvas" style="width: 110px; height:24px;"></canvas>'
