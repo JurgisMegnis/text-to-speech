@@ -12,25 +12,41 @@ interface SelectionChangedDetail {
 export default class TextToSpeech implements SpeakMethod {
     private textField: HTMLTextAreaElement
     private selectedVoice: string | null
+    private getVoicesClass: GetVoices
     utterThis: SpeechSynthesisUtterance
     
     constructor(textField: HTMLTextAreaElement, eventTarget: EventTarget) {
         this.textField = textField
         this.selectedVoice = null
         this.utterThis = new SpeechSynthesisUtterance
+        this.getVoicesClass = new GetVoices()
 
+        /* event listener for voice change */
         eventTarget.addEventListener('selectionChanged', ((event: Event) => {
             const customEvent = event as CustomEvent<SelectionChangedDetail>
             this.selectedVoice = customEvent.detail.selectedValue
         }) as EventListener)
     }
 
-    async speak(): Promise<void> {
-        const getVoicesClass: GetVoices = new GetVoices()
-        const synth: SpeechSynthesis = getVoicesClass.synth
+    /* take the selected value and find it in the Voice Object */
+    async getSelectedVoice(): Promise<void> {
+        if (this.selectedVoice) {
+            const voices = await this.getVoicesClass.getVoiceObj()
+            const selectedVoiceObj = voices.find(v => v.name === this.selectedVoice)
+            if (selectedVoiceObj) {
+                this.utterThis.voice = selectedVoiceObj
+            }
+        }
+    }
 
-        synth.cancel()
+    async speak(): Promise<void> {
+        const synth: SpeechSynthesis = this.getVoicesClass.synth
+        synth.cancel() // cancel if speech is in progress
         
+        /* get the selected voice */
+        await this.getSelectedVoice()
+        
+        /* if text field is empty ask user to write something else use the text that has been input */
         if (this.textField.value === '') {
             this.utterThis.text = "Please write something for me to say"
             this.textField.classList.add('shake')
@@ -41,15 +57,6 @@ export default class TextToSpeech implements SpeakMethod {
             this.utterThis.text = this.textField.value
         }
         
-        if (this.selectedVoice) {
-            const voices = await getVoicesClass.getVoiceObj()
-            const selectedVoiceObj = voices.find(v => v.name === this.selectedVoice)
-            if (selectedVoiceObj) {
-                this.utterThis.voice = selectedVoiceObj
-            }
-        }
-    
         synth.speak(this.utterThis)
-        this.textField.blur()
     }
 }

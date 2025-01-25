@@ -11,6 +11,7 @@ export default class ListTemplate {
         this.getSelectedValue()
     }
 
+    /* populates the select element with voice options retrieved from the GetVoices model */
     private populate(): void {
         const languageList: GetVoices = new GetVoices()
         languageList.getVoiceObj()
@@ -22,6 +23,10 @@ export default class ListTemplate {
                 this.selectElement.appendChild(option)
                 option.setAttribute("data-lang", voiceItem.lang)
                 option.setAttribute("data-name", voiceItem.name)
+
+                if (voiceItem.default) {
+                    option.selected = true
+                }
             })            
         })
         .catch(error => {
@@ -29,6 +34,7 @@ export default class ListTemplate {
         })
     }
 
+    /* event listener for a change in the select element, retrieves the selected value and dispatches it */
     private getSelectedValue(): void {
         this.selectElement.addEventListener('change', () => {
             let selectedValue: string | null = this.selectElement.selectedOptions[0].getAttribute("data-name")
@@ -36,6 +42,7 @@ export default class ListTemplate {
         })
     }
 
+    /* dispatches a custom event 'selectionChanged' with the selected value as detail */
     private dispatchSelectedValue(selectedValue: string | null): void {
         const event = new CustomEvent('selectionChanged', { detail: {selectedValue} })
         this.eventTarget.dispatchEvent(event)
