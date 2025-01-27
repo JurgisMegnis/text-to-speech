@@ -5,6 +5,11 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10svh;
-    margin-top: 23svh;
+    gap: 16svh;
+    margin-top: auto;
+
+    @include respond-large {
+        gap: 6svh;
+        margin-top: 12svh;
+    }
 }
