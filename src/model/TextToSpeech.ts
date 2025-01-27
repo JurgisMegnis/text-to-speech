@@ -6,30 +6,39 @@ interface SpeakMethod {
 }
 
 interface SelectionChangedDetail {
-    selectedValue: string | null
+    selectedVoiceValue: string | null
+    selectedSpeedValue: string
 }
 
 export default class TextToSpeech implements SpeakMethod {
     private textField: HTMLTextAreaElement
     private selectedVoice: string | null
+    private selectedSpeed: string
     private getVoicesClass: GetVoices
     utterThis: SpeechSynthesisUtterance
     
     constructor(textField: HTMLTextAreaElement, eventTarget: EventTarget) {
         this.textField = textField
         this.selectedVoice = null
+        this.selectedSpeed = "1"
         this.utterThis = new SpeechSynthesisUtterance
         this.getVoicesClass = new GetVoices()
 
         /* event listener for voice change */
         eventTarget.addEventListener('selectionChanged', ((event: Event) => {
             const customEvent = event as CustomEvent<SelectionChangedDetail>
-            this.selectedVoice = customEvent.detail.selectedValue
+            this.selectedVoice = customEvent.detail.selectedVoiceValue
+            this.selectedSpeed = customEvent.detail.selectedSpeedValue
         }) as EventListener)
     }
 
-    /* take the selected value and find it in the Voice Object */
-    async getSelectedVoice(): Promise<void> {
+    /* assign the selected speed value to rate parameter */
+    private getSelectedSpeed(): void {
+        this.utterThis.rate = Number(this.selectedSpeed)
+    }
+
+    /* take the selected value and find it in the Voice Object, then assign it to the voice parameter */
+    private async getSelectedVoice(): Promise<void> {
         if (this.selectedVoice) {
             const voices = await this.getVoicesClass.getVoiceObj()
             const selectedVoiceObj = voices.find(v => v.name === this.selectedVoice)
@@ -45,6 +54,9 @@ export default class TextToSpeech implements SpeakMethod {
         
         /* get the selected voice */
         await this.getSelectedVoice()
+
+        /* get the selected speed */
+        this.getSelectedSpeed()
         
         /* if text field is empty ask user to write something else use the text that has been input */
         if (this.textField.value === '') {
