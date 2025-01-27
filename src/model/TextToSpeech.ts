@@ -34,7 +34,9 @@ export default class TextToSpeech implements SpeakMethod {
 
     /* assign the selected speed value to rate parameter */
     private getSelectedSpeed(): void {
-        this.utterThis.rate = Number(this.selectedSpeed)
+        if (this.selectedSpeed) {
+            this.utterThis.rate = Number(this.selectedSpeed)
+        }
     }
 
     /* take the selected value and find it in the Voice Object, then assign it to the voice parameter */
